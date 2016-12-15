@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Hiker</string>
+
+    <!-- Tabs Title -->
+    <!--string name="homeTitle">Accueil</string>
+    <string name="sessionTitle">session</string>
+    <string name="mapTitle">Carte</string>
+    <string name="compassTitle">Boussole</string-->
+
+    <string name="changeUnits">Changer d\'unités</string>
+    <string name="home">Home</string>
+    <string name="session">Session</string>
+
+    <string name="textViewNoElems">Aucune session n\'a encore été effectuée</string>
+    <string name="textViewNoSession">Aucune session en cours</string>
+
+    <string name="map">Map</string>
+    <string name="compass">Compass</string>
+
+    <string name="textHomeTimeTitle">Temps</string>
+    <string name="textHomeDistanceTitle">Distance</string>
+    <string name="textHomeDistanceUnit">km</string>
+    <string name="textHomeAltitudeDiffTitle">Dénivelé</string>
+    <string name="textHomeAltitudeDiffUnit">m</string>
+
+    <!--Defaults Values-->
+    <string name="textDefaultTitle">DefaultTitle</string>
+    <string name="textDefaultTime">0:00:00</string>
+    <string name="textDefaultValue">0</string>
+    <string name="textDefaultId">0</string>
+</resources>

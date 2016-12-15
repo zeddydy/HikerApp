@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.project.randonner.activities.com.hiker.app.MainActivity">
+    <item
+        android:id="@+id/action_units"
+        android:orderInCategory="100"
+        android:title="@string/changeUnits"
+        app:showAsAction="never" />
+</menu>
