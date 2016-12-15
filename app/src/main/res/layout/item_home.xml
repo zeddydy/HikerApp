@@ -1,142 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="@string/textDefaultTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textHomeTitle"
-            android:textSize="36sp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="@string/textDefaultId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textHomeID"
-            android:layout_weight="1"
-            android:visibility="gone"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:background="?attr/selectableItemBackground">
 
-            <TextView
-                android:text="@string/textHomeDistanceTitle"
-                android:layout_marginBottom="-5dp"
+            <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textHomeDistanceTitle"/>
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    app:srcCompat="@drawable/border"
+                    android:id="@+id/homeImage"
+                    android:scaleType="centerCrop"
+                    android:layout_height="192dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginStart="5dp">
+
+                    <TextView
+                        android:text="@string/textDefaultTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textHomeTitle"
+                        android:textSize="36sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="@string/textDefaultId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textHomeID"
+                        android:layout_weight="1"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+            </android.support.design.widget.CoordinatorLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="@string/textDefaultValue"
-                    android:layout_marginTop="-5dp"
-                    android:layout_marginBottom="-5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textHomeDistanceValue"
-                    android:textSize="28sp" />
-
-                <TextView
-                    android:text="@string/textHomeDistanceUnit"
-                    android:layout_marginTop="-5dp"
-                    android:layout_marginBottom="-5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textHomeDistanceUnit" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:text="@string/textHomeTimeTitle"
-                android:layout_marginBottom="-5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textHomeTimeTitle"/>
+                android:baselineAligned="false"
+                android:layout_margin="3dp">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="@string/textDefaultTime"
-                    android:layout_marginTop="-5dp"
-                    android:layout_marginBottom="-5dp"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textHomeTimeValue"
-                    android:textSize="28sp" />
+                    android:layout_weight="1">
 
-            </LinearLayout>
-        </LinearLayout>
+                    <TextView
+                        android:text="@string/textHomeDistanceTitle"
+                        android:layout_marginBottom="-5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textHomeDistanceTitle"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-            <TextView
-                android:text="@string/textHomeAltitudeDiffTitle"
-                android:layout_marginBottom="-5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textHomeAltitudeDiffTitle"/>
+                        <TextView
+                            android:text="@string/textDefaultValue"
+                            android:layout_marginTop="-5dp"
+                            android:layout_marginBottom="-5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textHomeDistanceValue"
+                            android:textSize="28sp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                        <TextView
+                            android:text="@string/textHomeDistanceUnit"
+                            android:layout_marginTop="-5dp"
+                            android:layout_marginBottom="-5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textHomeDistanceUnit" />
+                    </LinearLayout>
+                </LinearLayout>
 
-                <TextView
-                    android:text="@string/textDefaultValue"
-                    android:layout_marginTop="-5dp"
-                    android:layout_marginBottom="-5dp"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textHomeAltitudeDiffValue"
-                    android:textSize="28sp" />
+                    android:layout_weight="1">
 
-                <TextView
-                    android:text="@string/textHomeAltitudeDiffUnit"
-                    android:layout_marginTop="-5dp"
-                    android:layout_marginBottom="-5dp"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:text="@string/textHomeTimeTitle"
+                        android:layout_marginBottom="-5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textHomeTimeTitle"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="@string/textDefaultTime"
+                            android:layout_marginTop="-5dp"
+                            android:layout_marginBottom="-5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textHomeTimeValue"
+                            android:textSize="28sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textHomeAltitudeDiffUnit"/>
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:text="@string/textHomeAltitudeDiffTitle"
+                        android:layout_marginBottom="-5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textHomeAltitudeDiffTitle"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="@string/textDefaultValue"
+                            android:layout_marginTop="-5dp"
+                            android:layout_marginBottom="-5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textHomeAltitudeDiffValue"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:text="@string/textHomeAltitudeDiffUnit"
+                            android:layout_marginTop="-5dp"
+                            android:layout_marginBottom="-5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textHomeAltitudeDiffUnit"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
-    </LinearLayout>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

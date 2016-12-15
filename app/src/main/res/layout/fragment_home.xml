@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.project.randonner.activities.com.hiker.app.fragments.HomeFragment">
+    tools:context="com.hiker.app.fragments.HomeFragment">
 
     <TextView
         android:text="@string/textViewNoElems"
@@ -26,6 +26,9 @@
             android:layout_height="match_parent"
             android:id="@+id/listViewHistory"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:listSelector="@android:color/transparent"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
     </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

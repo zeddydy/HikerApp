@@ -19,6 +19,7 @@ public class MyStorageManager extends SQLiteOpenHelper {
     public static final String TRACKS_COLUMN_ASCEND = "ascend";
     public static final String TRACKS_COLUMN_DESCEND = "descend";
     public static final String TRACKS_COLUMN_STEPS = "steps";
+    public static final String TRACKS_COLUMN_IMAGE = "image";
 
     public static final String POINTS_TABLE_NAME = "points";
     public static final String POINTS_COLUMN_ID = "_id";
@@ -42,7 +43,8 @@ public class MyStorageManager extends SQLiteOpenHelper {
                 TRACKS_COLUMN_DISTANCE + " INTEGER," +
                 TRACKS_COLUMN_ASCEND + " INTEGER," +
                 TRACKS_COLUMN_DESCEND + " INTEGER," +
-                TRACKS_COLUMN_STEPS + " INTEGER)"
+                TRACKS_COLUMN_STEPS + " INTEGER," +
+                TRACKS_COLUMN_IMAGE + " BLOB)"
         );
 
         db.execSQL("CREATE TABLE " + POINTS_TABLE_NAME + "(" +
@@ -77,11 +79,23 @@ public class MyStorageManager extends SQLiteOpenHelper {
         return db.insert(TRACKS_TABLE_NAME, null, contentValues);
     }
 
+    public long removeTrack(long id) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(TRACKS_TABLE_NAME, TRACKS_COLUMN_ID + "=?", new String[]{Long.toString(id)});
+    }
+
     public long updateTrack(long id, int distance, int steps) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TRACKS_COLUMN_DISTANCE, distance);
         contentValues.put(TRACKS_COLUMN_STEPS, steps);
+        return db.update(TRACKS_TABLE_NAME, contentValues, TRACKS_COLUMN_ID + "=?", new String[]{Long.toString(id)});
+    }
+
+    public long updateTrackImage(long id, byte[] img) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TRACKS_COLUMN_IMAGE, img);
         return db.update(TRACKS_TABLE_NAME, contentValues, TRACKS_COLUMN_ID + "=?", new String[]{Long.toString(id)});
     }
 

@@ -1,8 +1,12 @@
 package com.hiker.app.fragments;
 //package info.androidhive.materialtabs.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -17,6 +22,8 @@ import android.widget.TextView;
 import com.hiker.app.activities.ConsultActivity;
 import com.hiker.app.utils.MyStorageManager;
 import com.hiker.app.R;
+
+import java.io.ByteArrayInputStream;
 
 public class HomeFragment extends Fragment {
     private MyStorageManager myStorageManager;
@@ -72,8 +79,8 @@ public class HomeFragment extends Fragment {
                 getActivity(),
                 R.layout.item_home,
                 cursor,
-                new String[] {MyStorageManager.TRACKS_COLUMN_ID, MyStorageManager.TRACKS_COLUMN_NAME, MyStorageManager.TRACKS_COLUMN_DISTANCE},
-                new int[] {R.id.textHomeID, R.id.textHomeTitle, R.id.textHomeDistanceValue},
+                new String[] {MyStorageManager.TRACKS_COLUMN_ID, MyStorageManager.TRACKS_COLUMN_NAME, MyStorageManager.TRACKS_COLUMN_DISTANCE, MyStorageManager.TRACKS_COLUMN_IMAGE},
+                new int[] {R.id.textHomeID, R.id.textHomeTitle, R.id.textHomeDistanceValue, R.id.homeImage},
                 0);
 
         adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
@@ -85,6 +92,14 @@ public class HomeFragment extends Fragment {
                     return true;
                 } else if (i == cursor.getColumnIndex(MyStorageManager.TRACKS_COLUMN_END_TIME)) {
                     //TODO
+                    return true;
+                } else if (i == cursor.getColumnIndex(MyStorageManager.TRACKS_COLUMN_IMAGE)) {
+                    byte [] blob = cursor.getBlob(i);
+                    if (blob != null) { //TODO: Async Image Load
+                        ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
+                        ((ImageView) view).setImageBitmap(BitmapFactory.decodeStream(imageStream));
+                    } else ((ViewGroup)view.getParent()).removeView(view);
+                    return true;
                 }
                 return false;
             }
@@ -98,6 +113,33 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ConsultActivity.class);
                 intent.putExtra("id", Integer.valueOf(((TextView)view.findViewById(R.id.textHomeID)).getText().toString()));
                 startActivity(intent);
+            }
+        });
+
+        listViewHistory.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final long id = Long.valueOf(((TextView)view.findViewById(R.id.textHomeID)).getText().toString());
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                myStorageManager.removeTrack(id);
+                                updateHistory();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Voulez-vous vraiment supprimer la session \"" + ((TextView)view.findViewById(R.id.textHomeTitle)).getText().toString() + "\" de l'historique?").setPositiveButton("Oui", dialogClickListener).setNegativeButton("Non", dialogClickListener).show();
+
+                return true;
             }
         });
     }

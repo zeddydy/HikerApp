@@ -1,6 +1,8 @@
 package com.hiker.app.activities;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -17,9 +19,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hiker.app.fragments.CompassFragment;
@@ -36,10 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private com.hiker.app.utils.MyStorageManager MyStorageManager;
-
-    private BroadcastReceiver receiver;
-
     private FloatingActionButton fabLocation;
 
     private HomeFragment homeFragment;
@@ -121,7 +121,10 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.make(view, "Démarrage d'une session...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
                 else {
+                    long idTmp = State.getCurrentSession();
                     stopService(new Intent(getBaseContext(), TrackerService.class));
+                    mapFragment.saveSnapshot(idTmp);
+
                     ((FloatingActionButton)view).setImageResource(R.drawable.ic_float_plus);
                     Snackbar.make(view, "Arrêt de la session en cours...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }

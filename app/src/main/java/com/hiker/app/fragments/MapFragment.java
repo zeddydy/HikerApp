@@ -4,6 +4,7 @@ package com.hiker.app.fragments;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
@@ -14,7 +15,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -22,13 +25,19 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.hiker.app.utils.Constants;
 import com.hiker.app.utils.MyStorageManager;
 import com.hiker.app.R;
 import com.hiker.app.utils.State;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+
 public class MapFragment extends Fragment {
+    private final Object syncToken = new Object();
+
     private MyStorageManager myStorageManager;
 
     private LocationManager locationManager;
@@ -91,7 +100,7 @@ public class MapFragment extends Fragment {
                     LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
 
                     //Zoom to current Location
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(12).build();
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(16).build();
                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
             }
@@ -142,9 +151,54 @@ public class MapFragment extends Fragment {
         }
     }
 
+    public void saveSnapshot(long id) {
+        final long i = id;
+        GoogleMap.SnapshotReadyCallback callback = new GoogleMap.SnapshotReadyCallback() {
+
+            @Override
+            public void onSnapshotReady(Bitmap snapshot) {
+                try {
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    snapshot.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] img = stream.toByteArray();
+                    Toast.makeText(getContext(), "test", Toast.LENGTH_SHORT).show();
+
+                    myStorageManager.updateTrackImage(i, img);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        if (myStorageManager != null) {
+            Cursor cursor = myStorageManager.getPointsOfTrack(i);
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                while (!cursor.isAfterLast()) {
+                    builder.include(new LatLng(cursor.getFloat(cursor.getColumnIndex(MyStorageManager.POINTS_COLUMN_LATITUDE)), cursor.getFloat(cursor.getColumnIndex(MyStorageManager.POINTS_COLUMN_LONGITUDE))));
+                    cursor.moveToNext();
+                }
+                cursor.close();
+
+                LatLngBounds bounds = builder.build();
+
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 1400, 800, 50);   //TODO Peut-être le faire dans une map dédiée?
+
+                googleMap.moveCamera(cu);
+            }
+        } else zoomOnCurrentLocation();
+
+        googleMap.snapshot(callback);
+
+        //setMyLocationEnable(true);
+        zoomOnCurrentLocation();    //TODO Rendre le déplacement instanné?
+    }
+
     private int getCurrentSession() {
        return (int) State.getCurrentSession();
-    }
+    } //TODO: Remove?
 
     private void requestNeededPermissions() {
         // Should we show an explanation?
