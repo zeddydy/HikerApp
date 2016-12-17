@@ -140,7 +140,7 @@ public class MapFragment extends Fragment {
                     }
                 }
             }
-        } else clearPath(); //TODO: réfléchir au fait de supprimer le chemin ou pas *
+        } else clearPath();
     }
 
     public void setMyLocationEnable(boolean b) {
@@ -163,7 +163,6 @@ public class MapFragment extends Fragment {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     snapshot.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] img = stream.toByteArray();
-                    Toast.makeText(getContext(), "test", Toast.LENGTH_SHORT).show();
 
                     myStorageManager.updateTrackImage(i, img);
                 } catch (Exception e) {
