@@ -24,6 +24,7 @@
     <string name="textHomeAltitudeDiffUnit">m</string>
 
     <!--Defaults Values-->
+    <string name="contentDescriptionHomeImage">Session</string>
     <string name="textDefaultTitle">DefaultTitle</string>
     <string name="textDefaultTime">0:00:00</string>
     <string name="textDefaultValue">0</string>

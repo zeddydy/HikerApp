@@ -9,10 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp">
+        android:layout_marginBottom="8dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -26,10 +23,11 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    app:srcCompat="@drawable/border"
+                    app:srcCompat="@drawable/none"
                     android:id="@+id/homeImage"
                     android:scaleType="centerCrop"
-                    android:layout_height="192dp" />
+                    android:layout_height="192dp"
+                    android:contentDescription="@string/contentDescriptionHomeImage" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -62,7 +60,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
-                android:layout_margin="3dp">
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp">
 
                 <LinearLayout
                     android:orientation="vertical"

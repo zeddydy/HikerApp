@@ -97,11 +97,13 @@ public class MapFragment extends Fragment {
                     requestNeededPermissions();
                 } else {
                     Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), false));
-                    LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                    if (location != null) {
+                        LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
 
-                    //Zoom to current Location
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(16).build();
-                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        //Zoom to current Location
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(16).build();
+                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    }
                 }
             }
         }
