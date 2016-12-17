@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.hiker.app.utils.MyStorageManager;
 import com.hiker.app.R;
 import com.hiker.app.utils.State;
+import com.hiker.app.utils.Utils;
 
 //import info.androidhive.materialtabs.R;
 
@@ -64,14 +65,7 @@ public class SessionFragment extends Fragment {
         time = ((Chronometer)v.findViewById(R.id.chronometer));
         time.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             public void onChronometerTick(Chronometer cArg) {
-                long t = SystemClock.elapsedRealtime() - cArg.getBase();
-                int h = (int)(t /3600000);
-                int m = (int)(t - h*3600000)/60000;
-                int s = (int)(t - h*3600000- m*60000)/1000 ;
-                String hh = Integer.toString(h);
-                String mm = m < 10 ? "0" + m: "" + m;
-                String ss = s < 10 ? "0" + s: "" + s;
-                cArg.setText(hh + ":" + mm + ":" + ss);
+                cArg.setText(Utils.dateToString(SystemClock.elapsedRealtime() - cArg.getBase()));
             }
         });
 
