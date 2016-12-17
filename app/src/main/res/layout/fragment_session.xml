@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.project.randonner.activities.com.hiker.app.fragments.SessionFragment"
+    tools:context="com.hiker.app.fragments.SessionFragment"
     android:padding="8dp">
 
     <LinearLayout
