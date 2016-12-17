@@ -13,6 +13,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.hiker.app.utils.Constants;
@@ -113,7 +114,7 @@ public class TrackerService extends Service implements SensorEventListener {
         //TODO: Change Name
         myStorageManager = new MyStorageManager(getApplicationContext());
 
-        trackId = myStorageManager.insertTrack("Test");
+        trackId = myStorageManager.insertTrack("TestDate", SystemClock.elapsedRealtime());
 
         //Mise à jour des informations globales
         State.setServiceTrackerState(true);
@@ -131,7 +132,7 @@ public class TrackerService extends Service implements SensorEventListener {
         handler.postDelayed(new Runnable(){
             public void run(){
                 if (State.getCurrentSession() != -1) {
-                    myStorageManager.updateTrack(State.getCurrentSession(), (int)distance, steps);
+                    myStorageManager.updateTrack(State.getCurrentSession(), SystemClock.elapsedRealtime(), (int)distance, steps);
                     sendBroadcastUpdated(Constants.EXTRA_TRACK_UPDATED);
                 }
 
@@ -157,6 +158,8 @@ public class TrackerService extends Service implements SensorEventListener {
         locationMgr.removeUpdates(onLocationChange);
 
         mSensorManager.unregisterListener(this, mStepCounterSensor);
+
+        myStorageManager.updateTrack(State.getCurrentSession(), SystemClock.elapsedRealtime(), (int)distance, steps);
 
         State.setServiceTrackerState(false);
         State.setCurrentSession(-1);

@@ -66,11 +66,11 @@ public class MyStorageManager extends SQLiteOpenHelper {
     }
 
     /* Table Tracks */
-    public long insertTrack(String name) { //TODO Ajouts de Start Time
+    public long insertTrack(String name, long start) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TRACKS_COLUMN_NAME, name);
-        contentValues.put(TRACKS_COLUMN_START_TIME, 0);
+        contentValues.put(TRACKS_COLUMN_START_TIME, start);
         contentValues.put(TRACKS_COLUMN_END_TIME, 0);
         contentValues.put(TRACKS_COLUMN_DISTANCE, 0);
         contentValues.put(TRACKS_COLUMN_ASCEND, 0);
@@ -84,9 +84,10 @@ public class MyStorageManager extends SQLiteOpenHelper {
         return db.delete(TRACKS_TABLE_NAME, TRACKS_COLUMN_ID + "=?", new String[]{Long.toString(id)});
     }
 
-    public long updateTrack(long id, int distance, int steps) {
+    public long updateTrack(long id, long time, int distance, int steps) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(TRACKS_COLUMN_END_TIME, time);
         contentValues.put(TRACKS_COLUMN_DISTANCE, distance);
         contentValues.put(TRACKS_COLUMN_STEPS, steps);
         return db.update(TRACKS_TABLE_NAME, contentValues, TRACKS_COLUMN_ID + "=?", new String[]{Long.toString(id)});

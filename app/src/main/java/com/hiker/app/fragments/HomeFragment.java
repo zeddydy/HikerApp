@@ -18,10 +18,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hiker.app.activities.ConsultActivity;
 import com.hiker.app.utils.MyStorageManager;
 import com.hiker.app.R;
+import com.hiker.app.utils.Utils;
 
 import java.io.ByteArrayInputStream;
 
@@ -79,19 +81,20 @@ public class HomeFragment extends Fragment {
                 getActivity(),
                 R.layout.item_home,
                 cursor,
-                new String[] {MyStorageManager.TRACKS_COLUMN_ID, MyStorageManager.TRACKS_COLUMN_NAME, MyStorageManager.TRACKS_COLUMN_DISTANCE, MyStorageManager.TRACKS_COLUMN_IMAGE},
-                new int[] {R.id.textHomeID, R.id.textHomeTitle, R.id.textHomeDistanceValue, R.id.homeImage},
+                new String[] {MyStorageManager.TRACKS_COLUMN_ID, MyStorageManager.TRACKS_COLUMN_NAME, MyStorageManager.TRACKS_COLUMN_DISTANCE, MyStorageManager.TRACKS_COLUMN_END_TIME, MyStorageManager.TRACKS_COLUMN_IMAGE},
+                new int[] {R.id.textHomeID, R.id.textHomeTitle, R.id.textHomeDistanceValue, R.id.textHomeTimeValue, R.id.homeImage},
                 0);
 
         adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
             @Override
             public boolean setViewValue(View view, Cursor cursor, int i) {
-                //Conversion des mètres en kilomètres
                 if (i == cursor.getColumnIndex(MyStorageManager.TRACKS_COLUMN_DISTANCE)) {
+                    //Conversion des mètres en kilomètres
                     ((TextView)view).setText(String.valueOf(cursor.getInt(i)/1000));
                     return true;
                 } else if (i == cursor.getColumnIndex(MyStorageManager.TRACKS_COLUMN_END_TIME)) {
-                    //TODO
+                    //Toast.makeText(getActivity(), cursor.getLong(i) + " " + cursor.getLong(cursor.getColumnIndex(MyStorageManager.TRACKS_COLUMN_START_TIME)), Toast.LENGTH_SHORT).show();
+                    ((TextView)view).setText(String.valueOf(Utils.dateToString(cursor.getLong(i) - cursor.getLong(cursor.getColumnIndex(MyStorageManager.TRACKS_COLUMN_START_TIME)))));
                     return true;
                 } else if (i == cursor.getColumnIndex(MyStorageManager.TRACKS_COLUMN_IMAGE)) {
                     byte [] blob = cursor.getBlob(i);
