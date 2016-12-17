@@ -1,5 +1,4 @@
 package com.hiker.app.fragments;
-//package info.androidhive.materialtabs.fragments;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -15,7 +14,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,7 +31,6 @@ import com.hiker.app.R;
 import com.hiker.app.utils.State;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 
 public class MapFragment extends Fragment {
     private final Object syncToken = new Object();
