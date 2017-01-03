@@ -5,33 +5,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.project.randonner.activities.com.hiker.app.CompassFragment">
+    tools:context="com.hiker.app.fragments.CompassFragment">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:text="@string/textDefaultValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textLattitude"
+            android:layout_weight="1"
+            android:textAlignment="center" />
+
+        <TextView
+            android:text="@string/textDefaultValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textLongitude"
+            android:layout_weight="1"
+            android:textAlignment="center" />
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:srcCompat="@drawable/bousole"
         android:id="@+id/bousole"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="28dp" />
+        android:contentDescription="@string/contentDescriptionCompassImage"
+        android:scaleType="centerInside" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginBottom="30dp"
-        android:id="@+id/lattitude" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/lattitude"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="29dp"
-        android:id="@+id/longitude" />
 </RelativeLayout>
